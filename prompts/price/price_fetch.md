@@ -10,6 +10,15 @@
 - stock_us: 美国股市
 - open_fund: 中国登记的合法公募基金
 
+## 账本内基准货币获取
+一种获取beancount 账本内基准货币的方法如下所示：
+```python
+from beancount.loader import load_file
+
+entries, errors, options = load_file("your_ledger.beancount")
+operating_currencies = options["operating_currency"]
+```
+
 ## 配置文件说明
 ```yaml
 common:
@@ -47,17 +56,9 @@ price:
 ## commodity 价格获取接口
 commodity的价格均使用 akshare 这个库进行获取
 ### currency
-对于汇率，需要获取到每一种货币相对于 beancount 账本基准货币的价格，一种获取beancount 账本内基准货币的方法如下所示：
-```python
-from beancount.loader import load_file
-
-entries, errors, options = load_file("your_ledger.beancount")
-operating_currencies = options["operating_currency"]
-```
-
 接口调用示例（获取 USD 相对于 CNY 的价格）
 ```
-currency_time_series_df = ak.currency_time_series(base="USD", start_date="2023-02-03", end_date="2023-03-04", symbols="", api_key="此处输入 API")
+currency_time_series_df = ak.currency_time_series(base="USD", start_date="2023-02-03", end_date="2023-03-04", symbols="", api_key="your-api-key")
 ```
 接口文档链接：https://akshare.akfamily.xyz/data/currency/currency.html#id2
 
