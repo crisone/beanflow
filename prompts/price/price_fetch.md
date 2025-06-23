@@ -107,6 +107,7 @@ fund_open_fund_info_em_df = ak.fund_open_fund_info_em(symbol="710001", indicator
 
 
 ## 其他开发要求
+- 请先阅读相关的 akshare 的接口文档，确保了解输入输出格式，并确保日期格式转换正确
 - 不要使用 venv，需要运行 pip 时，直接安装即可
 - 不要修改 .beanflow/config.yaml，我已修改好
 - 记得更新配置管理 python 文件中的默认配置

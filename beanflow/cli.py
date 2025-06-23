@@ -13,6 +13,7 @@ from beanflow.importer.alipay import AlipayImporter
 from beanflow.importer.wechat import WechatImporter
 from beanflow.importer.jd import JdImporter  # Temporarily disabled due to import issues
 from beanflow.importer.meituan import MeituanImporter
+from beanflow.price.main import run_price_fetch
 
 # Placeholder classes for unimplemented importers
 class CCBImporter:
@@ -47,6 +48,7 @@ Examples:
   beanflow import -e alipay extract /path/to/alipay.csv
   beanflow import -e wechat extract /path/to/wechat.csv
   beanflow import -e meituan extract /path/to/meituan.csv
+  beanflow price --from 20250615 --to 20250622 --overwrite
             """
         )
         
@@ -66,7 +68,13 @@ Examples:
             nargs=argparse.REMAINDER,
             help='Arguments to pass to the importer (command and file path)'
         )
-        
+
+        # Price command
+        price_parser = subparsers.add_parser('price', help='Fetch and update commodity price history')
+        price_parser.add_argument('--from', dest='from_date', type=str, default=None, help='Start date (yyyymmdd or yyyy-mm-dd)')
+        price_parser.add_argument('--to', dest='to_date', type=str, default=None, help='End date (yyyymmdd or yyyy-mm-dd)')
+        price_parser.add_argument('--overwrite', action='store_true', help='Overwrite existing price data')
+
         return parser
     
     def run_import(self, args):
@@ -111,6 +119,9 @@ Examples:
         
         if parsed_args.command == 'import':
             return self.run_import(parsed_args)
+        if parsed_args.command == 'price':
+            run_price_fetch(from_date=parsed_args.from_date, to_date=parsed_args.to_date, overwrite=parsed_args.overwrite)
+            return 0
         
         return 0
 

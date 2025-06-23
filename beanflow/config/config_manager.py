@@ -61,6 +61,10 @@ class ConfigManager:
             'common': {
                 'beancount_main': 'beancount/main.bean'
             },
+            'price': {
+                'data_dir': 'commodity_price',
+                'currency_api_key': 'your-api-key'
+            },
             'llm_provider': {
                 'base_url': 'https://api.deepseek.com/v1',
                 'api_key': 'your-api-key',
