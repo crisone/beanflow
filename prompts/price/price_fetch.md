@@ -47,16 +47,21 @@ price:
 ## commodity 价格获取接口
 commodity的价格均使用 akshare 这个库进行获取
 ### currency
-示例
+对于汇率，需要获取到每一种货币相对于 beancount 账本基准货币的价格，一种获取beancount 账本内基准货币的方法如下所示：
+```python
+from beancount.loader import load_file
+
+entries, errors, options = load_file("your_ledger.beancount")
+operating_currencies = options["operating_currency"]
 ```
-currency_history_df = ak.currency_history(base="USD", date="2023-02-03", symbols="CNY", api_key="your api key")
+
+接口调用示例（获取 USD 相对于 CNY 的价格）
+```
+currency_time_series_df = ak.currency_time_series(base="USD", start_date="2023-02-03", end_date="2023-03-04", symbols="", api_key="此处输入 API")
 ```
 接口文档链接：https://akshare.akfamily.xyz/data/currency/currency.html#id2
 
-如果查 USD 的价格，应该把 USD 设为 base，CNY 设为 symbols，最终的价格格式类似：
-```
-2024-06-26 price USD 7.22 CNY
-```
+对于查询每一种货币的价格，需要将该货币设置为 base，将 基准货币 设置为 symbols
 
 ### stock_zh_a
 示例
