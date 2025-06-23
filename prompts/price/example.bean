@@ -1,0 +1,32 @@
+; CN Stocks
+2025-01-01 commodity BIYADI
+    name: "比亚迪"
+    symbol: "002594"
+    commodity_type: "stock_zh_a"
+
+; CN Public Funds
+2021-01-01 commodity JSHBDTGP
+    name: "嘉实环保低碳股票"
+    symbol: "001616"
+    commodity_type: "open_fund"
+
+; HK
+2025-01-01 commodity XIECHENG
+    name: "携程集团"
+    symbol: "09961"
+    commodity_type: "stock_hk"
+
+; US
+2025-01-01 commodity TSLA
+    name: "TESLA"
+    symbol: "105.TSLA"
+    commodity_type: "stock_us"
+
+; Currency
+2021-01-01 commodity IDR
+  precision: 2
+  commodity_type: "currency"
+
+2021-01-01 commodity PHP
+  precision: 2
+  commodity_type: "currency"
