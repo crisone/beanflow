@@ -35,7 +35,12 @@ price:
 运行命令行之后应该将查询到的价格更新到 price.data_dir 下的指定文件中
 
 ## 文件更新规则
-每一种 commodity 在 price.data_dir 之下有自己的一个单独文件用于记录历史价格数据。当通过beanflow查询历史价格数据时，按照以下规则进行更新：
+每一种 commodity 在 price.data_dir 之下有自己的一个单独的.bean文件用于记录历史价格数据。其中内容符合 beancount 对于 price 声明的定义格式，如:
+```
+2014-05-25 price IBM   182.27 USD
+```
+
+当通过beanflow查询历史价格数据时，按照以下规则进行更新：
 - 如果文件不存在，则新建文件，并将查询到的所有历史价格数据写入
 - 如果文件存在，则读取文件中的内容，根据命令行参数选择是否覆盖已有日期的历史数据，最后重新排序并按照时间排序输出到文件中。
 
@@ -48,7 +53,10 @@ currency_history_df = ak.currency_history(base="USD", date="2023-02-03", symbols
 ```
 接口文档链接：https://akshare.akfamily.xyz/data/currency/currency.html#id2
 
-如果查 USD 的价格，应该把 USD 设为 base，CNY 设为 symbols
+如果查 USD 的价格，应该把 USD 设为 base，CNY 设为 symbols，最终的价格格式类似：
+```
+2024-06-26 price USD 7.22 CNY
+```
 
 ### stock_zh_a
 示例
@@ -58,7 +66,7 @@ stock_zh_a_hist_df = ak.stock_zh_a_hist(symbol="000001", period="daily", start_d
 接口文档链接：https://akshare.akfamily.xyz/data/stock/stock.html#id22
 
 其中 symbol 可以在 commodity 的 meta 信息中找到
-查询出来的数据以当日的收盘价为准
+查询出来的数据以当日的收盘价为准，单位货币为 CNY
 
 ### stock_hk
 
@@ -69,7 +77,7 @@ stock_hk_hist_df = ak.stock_hk_hist(symbol="00593", period="daily", start_date="
 接口文档链接：https://akshare.akfamily.xyz/data/stock/stock.html#id70
 
 其中 symbol 可以在 commodity 的 meta 信息中找到
-查询出来的数据以当日的收盘价为准
+查询出来的数据以当日的收盘价为准，单位货币为 HKD
 
 ### stock_us
 示例
@@ -79,7 +87,7 @@ stock_us_hist_df = ak.stock_us_hist(symbol='106.TTE', period="daily", start_date
 接口文档链接：https://akshare.akfamily.xyz/data/stock/stock.html#id58
 
 其中 symbol 可以在 commodity 的 meta 信息中找到
-查询出来的数据以当日的收盘价为准
+查询出来的数据以当日的收盘价为准，单位货币为 USD
 
 ### open_fund
 示例
@@ -89,8 +97,10 @@ fund_open_fund_info_em_df = ak.fund_open_fund_info_em(symbol="710001", indicator
 接口文档链接：https://akshare.akfamily.xyz/data/fund/fund_public.html#id15
 
 其中 symbol 可以在 commodity 的 meta 信息中找到
-查询出来的数据以单位净值为准
+查询出来的数据以单位净值为准，单位货币为 CNY
 
 
 ## 其他开发要求
 - 不要使用 venv，需要运行 pip 时，直接安装即可
+- 不要修改 .beanflow/config.yaml，我已修改好
+- 记得更新配置管理 python 文件中的默认配置
