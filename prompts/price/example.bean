@@ -30,3 +30,22 @@
 2021-01-01 commodity PHP
   precision: 2
   commodity_type: "currency"
+
+; Test new commodity
+2025-01-01 commodity AAPL
+    name: "Apple Inc"
+    symbol: "105.AAPL"
+    commodity_type: "stock_us"
+include "../../commodity_price/JSHBDTGP.bean"
+
+include "../../commodity_price/IDR.bean"
+
+include "../../commodity_price/PHP.bean"
+
+include "../../commodity_price/BIYADI.bean"
+
+include "../../commodity_price/XIECHENG.bean"
+
+include "../../commodity_price/TSLA.bean"
+
+include "../../commodity_price/AAPL.bean"

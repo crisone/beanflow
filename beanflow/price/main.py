@@ -45,6 +45,6 @@ def run_price_fetch(from_date: str = None, to_date: str = None, overwrite: bool 
                     base_currency=base_currency,
                     api_key=api_key
                 )
-                write_price_file(commodity, price_dict, data_dir, overwrite=overwrite)
+                write_price_file(commodity, price_dict, data_dir, overwrite=overwrite, main_file_path=beancount_main)
             except Exception as e:
                 print(f"Failed to fetch {commodity}: {e}") 
