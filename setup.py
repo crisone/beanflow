@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="beanflow",
-    version="0.1.0",
+    version="0.1.1",
     author="Yuan Jiang",
     author_email="jiangyuan26@gmail.com",
     description="A Python library for Beancount workflow beanflow",

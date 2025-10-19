@@ -16,7 +16,7 @@ class AlipayImporter(CsvBaseImporter):
         # file formats
         self.encoding = "gb18030"
         self.head_keywords = "支付宝"
-        self.headline_keywords = "支付宝（中国）网络技术有限公司  电子客户回单"
+        self.headline_keywords = "电子客户回单"
         self.filename_prefix = "alipay"
     
     def _row_to_deal_(self, row):
