@@ -29,6 +29,12 @@ setup(
     install_requires=[
         "beancount",
         "PyYAML>=5.1",
+        "python-dotenv",
+        "openai",
+        "beangulp",
+        "akshare",
+        "yfinance",
+        "pandas",
     ],
     extras_require={
         "dev": [
